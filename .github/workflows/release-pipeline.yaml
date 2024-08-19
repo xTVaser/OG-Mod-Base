@@ -20,6 +20,8 @@ jobs:
   cut-release:
     name: Cut Release
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.set_tag.outputs.new_tag }}
     steps:
       # Docs - https://github.com/mathieudutour/github-tag-action
       - name: Bump Version and Push Tag
@@ -37,6 +39,7 @@ jobs:
         run: gh release create ${{ steps.tag_version.outputs.new_tag }} --generate-notes --draft --repo ${{ github.repository }}
 
       - name: Output new tag
+        id: set_tag
         run: |
           echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> $GITHUB_OUTPUT
 
@@ -81,8 +84,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.cut-release.outputs.new_tag }}
 
       - name: Prepare Artifact Folder
         run: mkdir -p ./ci-artifacts/final
