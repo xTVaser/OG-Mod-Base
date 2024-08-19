@@ -20,13 +20,13 @@ jobs:
     secrets: inherit
 
   build_macos_intel:
-  name: "🍎 MacOS"
-  uses: ./.github/workflows/macos-build.yaml
-  with:
-    cmakePreset: "Release-macos-clang-static"
-    cachePrefix: "static"
-    uploadArtifacts: true
-  secrets: inherit
+    name: "🍎 MacOS"
+    uses: ./.github/workflows/macos-build.yaml
+    with:
+      cmakePreset: "Release-macos-clang-static"
+      cachePrefix: "static"
+      uploadArtifacts: true
+    secrets: inherit
 
   # Windows
   # build_windows_clang:
