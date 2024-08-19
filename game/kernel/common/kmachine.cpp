@@ -10,6 +10,12 @@
 // NOTE - this is needed, because on macOS, there is a file called `MacTypes.h`
 // inside it, it defines something named `Ptr`
 // Our `Ptr` is not namespaced, so there is ambiguity.
+//
+// Second fix is because miniaudio redefines functions in the stdlib based on bad pre-processor assumptions
+// AppleClang apparently does not define POSIX macros, leading to future ambiguity
+#if defined(__APPLE__)
+#define _POSIX_C_SOURCE 200809L
+#endif
 namespace MiniAudioLib {
 #include "third-party/miniaudio.h"
 }
