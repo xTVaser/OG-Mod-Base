@@ -20,7 +20,8 @@ namespace MiniAudioLib {
 #include "third-party/miniaudio.h"
 #undef _POSIX_C_SOURCE
 #else
-// It should work, but for some reason it didn't this is the unlikely branch but lets maintain it
+// It should work if it's defined, but for some reason it didn't this is the unlikely branch
+// but lets maintain the original value
 #define NOT_REAL_OLD_POSIX_C_SOURCE _POSIX_C_SOURCE
 #include "third-party/miniaudio.h"
 #define _POSIX_C_SOURCE NOT_REAL_OLD_POSIX_C_SOURCE
